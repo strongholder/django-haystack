@@ -29,6 +29,9 @@ def default_get_identifier(obj_or_string):
     #
     #     return obj_or_string
 
+    if isinstance(obj_or_string, six.string_types):
+        return obj_or_string
+
     return u"%s.%s" % (get_model_ct(obj_or_string),
                        obj_or_string._get_pk_val())
 
