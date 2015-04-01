@@ -23,11 +23,11 @@ def default_get_identifier(obj_or_string):
 
     If not overridden, uses <app_label>.<object_name>.<pk>.
     """
-    if isinstance(obj_or_string, six.string_types):
-        if not IDENTIFIER_REGEX.match(obj_or_string):
-            raise AttributeError(u"Provided string '%s' is not a valid identifier." % obj_or_string)
-
-        return obj_or_string
+    # if isinstance(obj_or_string, six.string_types):
+    #     if not IDENTIFIER_REGEX.match(obj_or_string):
+    #         raise AttributeError(u"Provided string '%s' is not a valid identifier." % obj_or_string)
+    #
+    #     return obj_or_string
 
     return u"%s.%s" % (get_model_ct(obj_or_string),
                        obj_or_string._get_pk_val())
