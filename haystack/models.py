@@ -83,6 +83,14 @@ class SearchResult(object):
                     # Revert to old behaviour
                     self._object = self.model._default_manager.get(pk=self.pk)
             except ObjectDoesNotExist:
+                try:
+                    # log properly to sentry
+                    from djutils.middlewares.ThreadLocals import get_current_request
+                    from django.core.signals import got_request_exception
+                    got_request_exception.send(sender=self, request=get_current_request())
+                except:
+                    pass
+
                 self.log.error("Object could not be found in database for SearchResult '%s'.", self)
                 self._object = None
 
